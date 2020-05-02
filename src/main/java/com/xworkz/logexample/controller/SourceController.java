@@ -11,18 +11,18 @@ public class SourceController {
 	final static Logger logger = Logger.getLogger(SourceController.class);
 
 	public SourceController() {
-		// System.out.println(this.getClass().getSimpleName() + "obj created");
 		logger.info(this.getClass().getSimpleName() + " obj created using info");
-		logger.warn(this.getClass().getSimpleName() + " obj created using warn");
-		logger.fatal(this.getClass().getSimpleName() + "obj created using fatal");
-		logger.error(this.getClass().getSimpleName() + "obj created using error");
 	}
 
 	@RequestMapping("/msg.do")
 	public String getMessage(Model model) {
-		//System.out.println("inside getMessage().....");
-		logger.info("inside getMessage().....");
+		logger.info("inside getMessage() of controller.....");
 		model.addAttribute("message", "Hello all.....!!!!!!");
+		try {
+			new Throwable("Custom Exception...");
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
 		return "welcome.jsp";
 
 	}
